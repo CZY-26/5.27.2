@@ -1,0 +1,31 @@
+const list1 = document.getElementById('list1');
+const list2 = document.getElementById('list2');
+const list3 = document.getElementById('list3');
+const carouselArr = [list1, list2, list3];
+
+let offset = 0;
+let direction = 'left';   
+const imgWidth = 800;     
+const imgCount = 5;      
+
+setInterval(() => {
+    direction = direction === 'left' ? 'right' : 'left';
+}, 30000);
+
+function scrollImg() {
+    if (direction === 'left') {
+        offset -= 1;
+        if (offset <= -imgWidth * imgCount) {
+            offset = 0;
+        }
+    } else {
+        offset += 1;
+        if (offset >= 0) {
+            offset = -imgWidth * (imgCount - 1);
+        }
+    }
+    carouselArr.forEach(item => {
+        item.style.transform = `translateX(${offset}px)`;
+    });
+}
+setInterval(scrollImg, 15);
